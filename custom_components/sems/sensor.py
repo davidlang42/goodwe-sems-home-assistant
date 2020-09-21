@@ -112,7 +112,11 @@ class SemsSensor(Entity):
             for key, value in jsonResponseFinal["data"]["inverter"][0]["invert_full"].items():
                 if(key is not None and value is not None):
                     self._attributes[key] = value
-                    _LOGGER.debug("Updated attribute %s: %s", key, value)
+                    _LOGGER.debug("Updated inverter attribute %s: %s", key, value)
+            for key, value in jsonResponseFinal["data"]["powerflow"].items():
+                if(key is not None and value is not None):
+                    self._attributes[key] = value
+                    _LOGGER.debug("Updated powerflow attribute %s: %s", key, value)
         except Exception as exception:
             _LOGGER.error(
                 "Unable to fetch data from SEMS. %s", exception)
